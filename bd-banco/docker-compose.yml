@@ -13,4 +13,14 @@ services:
       - ./inicializar:/docker-entrypoint-initdb.d  # scripts de inicialização
       - ./scripts:/scripts   # scripts que você pode executar manualmente
 
-
+  mysql-copia:
+    image: mysql:8.1
+    container_name: copiazinha
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+    ports:
+    - "3307:3306"
+    volumes:
+      - ./dados/mysql-copia:/var/lib/mysql
+      - ./mysql-b.cnf:/etc/mysql/conf.d/custom.cnf
